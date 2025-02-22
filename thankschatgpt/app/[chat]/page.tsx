@@ -41,7 +41,7 @@ export default function Page() {
 
       let data;
       try {
-        data = JSON.parse(textResponse); // Try parsing as JSON
+        data = JSON.parse(textResponse); // Try parsing as JSON data
       } catch (parseError) {
         console.error("Failed to parse API response as JSON:", parseError);
         console.error("Response received:", textResponse);
