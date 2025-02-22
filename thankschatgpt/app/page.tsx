@@ -1,6 +1,7 @@
 "use client";
 import Image from "next/image";
 import { SetStateAction, useState } from "react";
+import { useRouter } from "next/navigation";
 
 import {
   Card,
@@ -14,6 +15,7 @@ import { Input } from "@/components/ui/input";
 import { Button } from "@/components/ui/button";
 
 export default function Home() {
+  const router = useRouter();
   // Save user input during the session (start)
   const [error, setError] = useState<string | null>(null);
   const [userName, setUserName] = useState(""); // Store input
@@ -54,6 +56,7 @@ export default function Home() {
       if (response.ok) {
         console.log("Backend Response:", data);
         setSessionData({ userName, phoneNumber });
+        router.push(`/chat?name=${encodeURIComponent(userName)}`);
       } else {
         console.error("Error:", data.error);
       }
