@@ -26,7 +26,8 @@ export default function Home() {
   };
 
   const handlePhoneNumberChange = (e: React.ChangeEvent<HTMLInputElement>) => {
-    setPhoneNumber(e.target.value);
+    const value = e.target.value.replace(/\D/g, "");
+    setPhoneNumber(value);
   };
 
   // Save data
@@ -88,9 +89,11 @@ export default function Home() {
                 in case you need help (Optional)
               </p>
               <Input
+                type="tel"
                 placeholder="(123) 456-7890"
                 value={phoneNumber}
                 onChange={handlePhoneNumberChange}
+                maxLength={10}
               />
               <Button variant="outline" onClick={handleSave}>
                 Start
