@@ -63,10 +63,11 @@ export default function Page() {
   };
 
   return (
-    <div className="flex flex-col items-center justify-center h-screen w-full">
+    <div className="flex flex-col items-center justify-center w-full">
       {/* Chat Messages Container */}
-      <div className="w-screen flex flex-col justify-center items-center">
-        <div className="w-full max-w-md h-96 overflow-y-auto border border-gray-300 rounded-lg p-4 bg-gray-50 flex flex-col space-y-2">
+      <div className="w-screen flex flex-col h-max justify-center items-center p-4">
+        <div className="text-3xl font-bold p-8">Mental Health Assistant</div>
+        <div className="w-full max-w-md h-[600px] overflow-y-auto border border-gray-300 rounded-lg p-4 bg-gray-50 flex flex-col space-y-2">
           {messages.map((msg, index) => (
             <Messagebubble key={index} text={msg.text} sender={msg.sender} />
           ))}
