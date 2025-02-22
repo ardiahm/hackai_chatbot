@@ -12,7 +12,7 @@ export async function POST(req: NextRequest) {
     const { userMessage, chatHistory = [] } = await req.json();
 
     if (!userMessage) {
-      console.error("❌ No user message received.");
+      console.error(" No user message received.");
       return NextResponse.json({ error: "No message provided" }, { status: 400 });
     }
 
