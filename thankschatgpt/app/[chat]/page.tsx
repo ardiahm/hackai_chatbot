@@ -36,13 +36,26 @@ export default function Page() {
         body: JSON.stringify({ userMessage: input }),
       });
 
-      const data = await response.json();
+      const textResponse = await response.text(); // Read response as text first
+      console.log("Raw API Response:", textResponse); // Log full response for debugging
+
+      let data;
+      try {
+        data = JSON.parse(textResponse); // Try parsing as JSON
+      } catch (parseError) {
+        console.error("Failed to parse API response as JSON:", parseError);
+        console.error("Response received:", textResponse);
+        throw new Error("Invalid response from AI.");
+      }
 
       if (response.ok && data.reply) {
         const botMessage: Message = { text: data.reply, sender: "ai" };
         setMessages((prev) => [...prev, botMessage]);
       } else {
-        console.error("Error:", data.error || "Invalid response from AI.");
+        console.error(
+          "Error from API:",
+          data.error || "Invalid response from AI."
+        );
       }
     } catch (error) {
       console.error("Failed to send message:", error);
