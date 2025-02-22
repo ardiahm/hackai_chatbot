@@ -41,7 +41,11 @@ export default function Page() {
 
       let data;
       try {
+<<<<<<< HEAD
         data = JSON.parse(textResponse); // Try parsing as JSON data
+=======
+        data = JSON.parse(textResponse); // Try parsing as JSON
+>>>>>>> 70afcc1 (Merge pull request #8 from ardiahm/test_branch)
       } catch (parseError) {
         console.error("Failed to parse API response as JSON:", parseError);
         console.error("Response received:", textResponse);

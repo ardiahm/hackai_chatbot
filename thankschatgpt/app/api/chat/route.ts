@@ -1,5 +1,9 @@
 import { NextRequest, NextResponse } from "next/server";
+<<<<<<< HEAD
 import { GoogleGenerativeAI, HarmCategory, HarmBlockThreshold } from "@google/generative-ai";
+=======
+import { GoogleGenerativeAI } from "@google/generative-ai";
+>>>>>>> 70afcc1 (Merge pull request #8 from ardiahm/test_branch)
 
 const GEMINI_API_KEY = process.env.API_KEY;
 
@@ -12,12 +16,17 @@ export async function POST(req: NextRequest) {
     const { userMessage, chatHistory = [] } = await req.json();
 
     if (!userMessage) {
+<<<<<<< HEAD
       console.error(" No user message received.");
+=======
+      console.error("❌ No user message received.");
+>>>>>>> 70afcc1 (Merge pull request #8 from ardiahm/test_branch)
       return NextResponse.json({ error: "No message provided" }, { status: 400 });
     }
 
     console.log("✅ Sending request to Gemini...");
     const genAI = new GoogleGenerativeAI(GEMINI_API_KEY!);
+<<<<<<< HEAD
     const model = genAI.getGenerativeModel({ model: "gemini-2.0-flash" , generationConfig: {
         temperature: 1,
         topP: 0.95,
@@ -41,6 +50,9 @@ export async function POST(req: NextRequest) {
           threshold: HarmBlockThreshold.BLOCK_ONLY_HIGH,
         },
       ],});
+=======
+    const model = genAI.getGenerativeModel({ model: "gemini-pro" });
+>>>>>>> 70afcc1 (Merge pull request #8 from ardiahm/test_branch)
 
     // Construct full chat history for better response
     const chat = model.startChat({
@@ -52,11 +64,19 @@ export async function POST(req: NextRequest) {
 
     // Construct prompt
     const prompt = `
+<<<<<<< HEAD
     You are a compassionate mental health chatbot. Your primary goal is to provide emotional support, validation, and encouragement. Your responses should:
     - Start by showing empathy and understanding before offering any suggestions.
     - Focus on emotional validation, using phrases like "That sounds really tough" or "I'm here for you."
     - Avoid giving direct solutions unless explicitly asked for advice.
     - Use prior conversation context to provide thoughtful and warm responses.
+=======
+    You are a compassionate mental health chatbot. Your responses should be:
+    - Empathetic and supportive
+    - Encourage self-care and therapy when needed
+    - Never diagnose medical conditions
+    - Use prior conversation context to give relevant answers
+>>>>>>> 70afcc1 (Merge pull request #8 from ardiahm/test_branch)
 
     Previous conversation:
     ${chatHistory.map((msg: { sender: any; text: any; }) => `${msg.sender}: ${msg.text}`).join("\n")}
