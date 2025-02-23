@@ -18,7 +18,7 @@ export async function POST(req: NextRequest) {
 
     console.log("✅ Sending request to Gemini...");
     const genAI = new GoogleGenerativeAI(GEMINI_API_KEY!);
-    const model = genAI.getGenerativeModel({ model: "tunedModels/gemini-training-set-u1dgtyjaj3cy" , generationConfig: {
+    const model = genAI.getGenerativeModel({ model: "tunedModels/gemini-training-set-ad4u9515vzv7" , generationConfig: {
         temperature: 1,
         topP: 0.95,
         topK: 64,
