@@ -73,15 +73,20 @@ export default function Home() {
       <main className="flex flex-col gap-8 row-start-2 items-center sm:items-start">
         <div>
           <Card className="">
-            <CardHeader>
-              <CardTitle>We are here for you!</CardTitle>
-              <CardDescription>
-                Are you going through some hard time?
-              </CardDescription>
-            </CardHeader>
+            <div className="">
+              <CardHeader>
+                <CardTitle className="text-3xl text-center">
+                  We are here for you!
+                </CardTitle>
+                <CardDescription className="text-center">
+                  Enter the fields and chat away!
+                </CardDescription>
+              </CardHeader>
+            </div>
             <CardContent className="flex flex-col gap-4">
               <p>We would like to know you better</p>
               <Input
+                className="focus:outline-none focus:ring-2 focus:border-indigo-600 hover:border-indigo-600"
                 placeholder="Enter your name"
                 value={userName}
                 onChange={handleUserNameChange}
@@ -89,17 +94,22 @@ export default function Home() {
             </CardContent>
             <CardFooter className="flex flex-col gap-4">
               <p>
-                Enter someone's phone number who you can trust <br />
-                in case you need help (Optional)
+                In case you need help, enter the phone number of someone you
+                trust (Optional)
               </p>
               <Input
+                className="focus:outline-none focus:ring-2 focus:border-indigo-600 hover:border-indigo-600"
                 type="tel"
                 placeholder="(123) 456-7890"
                 value={phoneNumber}
                 onChange={handlePhoneNumberChange}
                 maxLength={10}
               />
-              <Button variant="outline" onClick={handleSave}>
+              <Button
+                className="bg-indigo-600 hover:bg-indigo-700 text-white hover:text-white"
+                variant="outline"
+                onClick={handleSave}
+              >
                 Start
               </Button>
             </CardFooter>
