@@ -4,12 +4,16 @@ import { useState, useRef, useEffect } from "react";
 import { Button } from "@/components/ui/button";
 import { Input } from "@/components/ui/input";
 import Messagebubble from "@/components/ui/messagebubble";
+import userName from "@/app/page";
+import phoneNumber from "@/app/page";
 
 export default function Page() {
   type Message = {
     text: string;
     sender: "user" | "ai";
   };
+
+  const phoneNumber = "+17323977655";
 
   const [messages, setMessages] = useState<Message[]>([
     { text: "Hello! How are you doing today?", sender: "ai" },
@@ -50,6 +54,24 @@ export default function Page() {
 
       if (response.ok && data.reply) {
         const botMessage: Message = { text: data.reply, sender: "ai" };
+        if (botMessage.text.includes("988")) {
+          try {
+            const twilioResponse = await fetch("/api/twilio-call", {
+              method: "POST",
+              headers: { "Content-Type": "application/json" },
+              body: JSON.stringify({ userName, phoneNumber }),
+            });
+
+            const twilioData = await twilioResponse.json();
+            if (twilioResponse.ok) {
+              console.log("Twilio Call Triggered: ", twilioData.callSid);
+            } else {
+              console.log("Twilio API Error: ", twilioData.error);
+            }
+          } catch (error) {
+            console.error("Failed to contact Twilio API: ", error);
+          }
+        }
         setMessages((prev) => [...prev, botMessage]);
       } else {
         console.error(
@@ -66,7 +88,7 @@ export default function Page() {
     <div className="flex flex-col items-center justify-center w-full">
       {/* Chat Messages Container */}
       <div className="w-screen flex flex-col h-max justify-center items-center p-4">
-        <div className="text-3xl font-bold p-8">Mental Health Assistant</div>
+        <div className="text-4xl font-bold p-8 text-indigo-600">MindlyAI</div>
         <div className="w-full max-w-md h-[600px] overflow-y-auto border border-gray-300 rounded-lg p-4 bg-gray-50 flex flex-col space-y-2">
           {messages.map((msg, index) => (
             <Messagebubble key={index} text={msg.text} sender={msg.sender} />

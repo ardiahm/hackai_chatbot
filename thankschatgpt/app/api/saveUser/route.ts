@@ -8,6 +8,8 @@ export async function POST(req: Request) {
       return NextResponse.json({ error: "User name is required." }, { status: 400 });
     }
 
+    
+
     console.log("Received Data:", { userName, phoneNumber });
 
     return NextResponse.json({ message: "Data saved successfully!" }, { status: 200 });
